@@ -1,0 +1,13 @@
+spring.application.name=SpringBoot-AI
+
+
+#----- openai_config -----
+spring.ai.openai.api-key=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
+
+#pip pointing the exact model
+#spring.ai.openai.chat.options.model = gpt-5.4
+#spring.ai.openai.chat.model = gpt-5.4
+
+#----- ollama -----
+#spring.ai.model.chat=ollama
+spring.ai.ollama.chat.model=mistral:latest
