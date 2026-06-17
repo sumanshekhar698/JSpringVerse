@@ -2,7 +2,7 @@ spring.application.name=SpringBoot-AI
 
 
 #----- openai_config -----
-spring.ai.openai.api-key=
+
 
 #pip pointing the exact model
 #spring.ai.openai.chat.options.model = gpt-5.4
