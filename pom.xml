@@ -1,17 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--<project xmlns="http://maven.apache.org/POM/4.0.0"-->
+<!--         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">-->
+<!--    <modelVersion>4.0.0</modelVersion>-->
+
+<!--    <groupId>dev.codecounty</groupId>-->
+<!--    <artifactId>java-spring-verse</artifactId>-->
+<!--    <version>1.0-SNAPSHOT</version>-->
+
+<!--    <properties>-->
+<!--        <maven.compiler.source>25</maven.compiler.source>-->
+<!--        <maven.compiler.target>25</maven.compiler.target>-->
+<!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+<!--    </properties>-->
+
+<!--</project>-->
+
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dev.codecounty</groupId>
-    <artifactId>java-spring-verse</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>jspringverse-parent</artifactId>
+    <!-- CHANGED: artifactId aligned with what the child expects in <parent> block -->
+    <version>0.0.1-SNAPSHOT</version>
+    <!-- CHANGED: version aligned with child's <parent> version reference -->
+    <packaging>pom</packaging>
+    <!-- ADDED: must be 'pom' for a parent/aggregator POM -->
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- ADDED: Centralize versions here so all child modules share one source of truth.
+             Children can still override these properties locally if they need a different version. -->
+        <spring-boot.version>4.1.0</spring-boot.version>
+        <spring-ai.version>2.0.0-RC2</spring-ai.version>
     </properties>
-    
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- ADDED: Import the Spring Boot BOM.
+                 This pins versions for all spring-boot-starter-* and related deps
+                 so child modules don't need to repeat versions on individual starters. -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- ADDED: Import the Spring AI BOM.
+                 Pins versions for all spring-ai-* artifacts centrally.
+                 Moved here from child, so any future AI module also benefits. -->
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <!-- ADDED: Declare the Spring Boot Maven plugin version centrally.
+                 Children that need it just reference the plugin without a version. -->
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
 </project>
