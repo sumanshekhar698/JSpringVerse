@@ -38,7 +38,14 @@
         <!-- ADDED: Centralize versions here so all child modules share one source of truth.
              Children can still override these properties locally if they need a different version. -->
         <spring-boot.version>4.1.0</spring-boot.version>
-        <spring-ai.version>2.0.0-RC2</spring-ai.version>
+        <!-- CHANGED: RC2 -> 2.0.0 GA. Release candidates are not appropriate for an
+             enterprise baseline; 2.0.0 is the stable line and is API-compatible here. -->
+        <spring-ai.version>2.0.0</spring-ai.version>
+
+        <!-- OpenAPI 3 / Swagger UI. Must be the 3.x line: springdoc 2.x targets Spring Boot 3
+             and does not see Boot 4's restructured autoconfiguration modules. Not managed by
+             the Spring Boot BOM, so the version is pinned here. -->
+        <springdoc.version>3.0.3</springdoc.version>
     </properties>
 
     <dependencyManagement>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!--
+      Liquibase owns every table this application uses, including the pgvector tables that
+      Spring AI would otherwise create for itself. spring.ai.vectorstore.pgvector
+      .initialize-schema is therefore false, and schema-validation is true so the app still
+      refuses to start if a changelog and the configured dimensions ever disagree.
+
+      Changesets are immutable once applied. To change an applied one, add a new changeset.
+    -->
+
+    <include file="db/changelog/changes/001-extensions.sql"/>
+    <include file="db/changelog/changes/002-filing-registry.sql"/>
+    <include file="db/changelog/changes/003-vector-tables.sql"/>
+    <include file="db/changelog/changes/004-metadata-indexes.sql"/>
+    <include file="db/changelog/changes/005-chat-memory.sql"/>
+
+</databaseChangeLog>
