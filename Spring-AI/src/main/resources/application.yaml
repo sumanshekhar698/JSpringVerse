@@ -1,0 +1,66 @@
+server:
+  port: 8081
+
+app:
+  ai:
+    default-provider: ollama
+    providers:
+      ollama:
+        - "qwen2.5-coder:7b"
+        - "qwen2.5-coder:14b"
+        - "qwen3:14b"
+        - "qwen3.5:latest"
+        - "mistral:latest"
+      openai:
+        - "gpt-4o"
+        - "gpt-4o-mini"
+        - "gpt-4-turbo"
+        - "gpt-3.5-turbo"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level [%X{requestId}] [%X{provider}:%X{model}] %logger{36} - %msg%n"
+  level:
+    org.springframework.ai: DEBUG
+    org.springframework.web.client.RestClient: DEBUG
+    org.apache.hc.client5.http.wire: DEBUG
+
+spring:
+  application:
+    name: Spring-AI
+  docker:
+    compose:
+      enabled: false
+  ai:
+    ollama:
+#     CHECK! curl http://localhost:11434
+      base-url: http://localhost:11434
+      chat:
+#        options:
+#          model: llama3 # Or mistral, deepseek-r1, qwen2.5, etc.
+#          temperature: 0.7
+#          top_p: 0.95
+#          top_k: 40
+#          repeat_penalty: 1.18
+#          repeat_last_n: 64
+#          max_tokens: 2048
+#        model: qwen2.5-coder:14b
+        model: qwen2.5-coder:7b
+#        temperature: 0.7
+#        top-p: 0.95
+#        top-k: 40
+#        repeat-penalty: 1.18
+#        repeat-last-n: 64
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        model: gpt-4o-mini          # Default for OpenAI

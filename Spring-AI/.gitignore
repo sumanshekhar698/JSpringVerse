@@ -1,0 +1,76 @@
+### Spring & Build Tool ###
+### Spring & Build Tool ###
+HELP.md
+.gradle/
+build/
+*.class
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# Maven (if switching or using maven wrapper)
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### AI & Secrets (Critical for Spring AI) ###
+# Local vector DB caches (Chroma, PGVector mounts, local simple vector stores)
+*.vectorstore
+*.db
+*.sqlite
+data/
+
+# Environment files containing API keys (OpenAI, Anthropic, etc.)
+.env
+.env.*
+!.env.example
+
+### Logs & Diagnostics ###
+*.log
+logs/
+
+### IntelliJ IDEA ###
+# Ignore IntelliJ specific workspace settings but allow sharing run configurations if needed
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/shelf/
+.idea/**/contentModel.xml
+.idea/*.iml
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### Eclipse / STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### VS Code ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### Operating System ###
+.DS_Store
+Thumbs.db
+Desktop.ini
